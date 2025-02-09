@@ -1,6 +1,6 @@
 #ifndef RANDOM_H
 #define RANDOM_H
-
+#include <time.h>
 //Biblioteca para sortear números aleatorios
 
 // Valores altos para gerar números pseudo-aleatorios
@@ -8,12 +8,16 @@
 #define C 10139044223
 #define M 4294967269
 
-unsigned int seed =123456789;// Valor alto para ter muita alteração na função random
-
-/*Processo que gera números pseudo-aleatorios onde a cada vez que for executado seed vai retornar um número diferente
-Seria melhor variar o valor do seed nessa função mas eu não sei como fazer isso, ainda, então vou deixar assim mesmo, por enquanto(eu acho)*/
 
 unsigned int random(){
+    /*usei o static para manter o ultimo valor gerado quando a função foi chamada;
+    O unsigned é para variavel não receber valores negativos;
+    time(NULL) pega o tempo da máquina em milissegundo - como o tipo time_l que normalmente é um long int, então converto em unsigned int*/
+    static unsigned int seed = 0;
+
+    if (seed == 0){ 
+        seed = (unsigned int)time(NULL);
+    }
     seed =(A * seed + C)%M; 
     return seed;
 }
