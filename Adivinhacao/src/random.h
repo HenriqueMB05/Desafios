@@ -19,7 +19,7 @@ unsigned int random(){
         seed = (unsigned int)time(NULL);
     }
     seed =(A * seed + C)%M; 
-    return seed;
+    return seed; 1
 }
 
 
